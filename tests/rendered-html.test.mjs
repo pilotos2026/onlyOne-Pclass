@@ -64,11 +64,12 @@ test("renders every public P0 route and the Control Room shell", async () => {
 });
 
 test("removes starter metadata and keeps Vercel deployment explicit", async () => {
-  const [page, layout, packageJson, vercelJson] = await Promise.all([
+  const [page, layout, packageJson, vercelJson, viteConfig] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../vercel.json", import.meta.url), "utf8"),
+    readFile(new URL("../vite.config.ts", import.meta.url), "utf8"),
   ]);
 
   const vercel = JSON.parse(vercelJson);
@@ -80,5 +81,7 @@ test("removes starter metadata and keeps Vercel deployment explicit", async () =
   assert.match(packageJson, /"build:vercel": "next build --webpack"/);
   assert.equal(vercel.framework, "nextjs");
   assert.equal(vercel.buildCommand, "npm run build:vercel");
+  assert.doesNotMatch(viteConfig, /from ["']\.\/\.openai\/hosting\.json["']/);
+  assert.match(viteConfig, /readFileSync/);
   await assert.rejects(access(new URL("app/_sites-preview", projectRoot)));
 });

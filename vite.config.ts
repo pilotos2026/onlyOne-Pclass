@@ -1,7 +1,18 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import vinext from "vinext";
 import { defineConfig } from "vite";
-import hostingConfig from "./.openai/hosting.json";
 import { sites } from "./build/sites-vite-plugin";
+
+interface HostingConfig {
+  r2?: string;
+}
+
+// Load Sites-only metadata at runtime. Vercel type-checks this file even when
+// the hidden `.openai` directory is not part of the GitHub upload.
+const hostingConfig = JSON.parse(
+  readFileSync(resolve(process.cwd(), ".openai/hosting.json"), "utf8"),
+) as HostingConfig;
 
 const { r2 } = hostingConfig;
 
