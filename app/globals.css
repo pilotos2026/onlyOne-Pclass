@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Overlock";
+  src: url("/fonts/overlock-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Overlock";
+  src: url("/fonts/overlock-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Overlock";
+  src: url("/fonts/overlock-900.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+:root {
+  --pclass-purple: #593079;
+  --pclass-purple-deep: #593079;
+  --pclass-purple-soft: #f3eef7;
+  --pclass-academy: #adb745;
+  --pclass-academy-deep: #778027;
+  --pclass-sky: #4fa5dc;
+  --pclass-school: #01c3a9;
+  --pclass-ink: #20172a;
+  --pclass-muted: #6f6577;
+  --pclass-line: #e8e1ec;
+  --pclass-surface: #ffffff;
+  --pclass-canvas: #f7f6f8;
+  --radius-sm: 0.75rem;
+  --radius-md: 1.125rem;
+  --radius-lg: 1.75rem;
+}
+
+@theme inline {
+  --color-background: var(--pclass-canvas);
+  --color-foreground: var(--pclass-ink);
+  --font-sans: "Overlock";
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--pclass-canvas);
+  color: var(--pclass-ink);
+  font-family: "Overlock", "Trebuchet MS", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(79, 165, 220, 0.55);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--pclass-academy);
+  color: var(--pclass-purple-deep);
+}
+
+.page-shell {
+  width: min(100% - 2rem, 74rem);
+  margin-inline: auto;
+}
+
+.eyebrow {
+  margin: 0 0 0.7rem;
+  color: var(--pclass-purple);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.display-title {
+  margin: 0;
+  font-size: clamp(2.45rem, 9vw, 4.7rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.93;
+}
+
+.section-title {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.section-copy {
+  max-width: 38rem;
+  margin: 1rem 0 0;
+  color: var(--pclass-muted);
+  font-size: clamp(1rem, 2vw, 1.16rem);
+}
+
+.button {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid transparent;
+  border-radius: 0.58rem;
+  cursor: pointer;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 160ms ease, background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  background: var(--pclass-academy);
+  color: var(--pclass-purple-deep);
+}
+
+.button-secondary {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: transparent;
+  color: #ffffff;
+}
+
+.button-purple {
+  background: var(--pclass-purple);
+  color: #ffffff;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.6rem;
+  background: #ffffff;
+  color: var(--pclass-purple);
+  font-weight: 900;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .page-shell {
+    width: min(100% - 4rem, 74rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
