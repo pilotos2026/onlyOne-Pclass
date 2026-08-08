@@ -52,6 +52,7 @@ test("renders every public P0 route and the Control Room shell", async () => {
     ["/uncp-2026-ii/mi-pclass", /Tu espacio PClass/],
     ["/control-room", /Sin datos de captación/],
     ["/control-room/login", /Acceso del equipo/],
+    ["/control-room/set-password", /Crea tu contraseña/],
   ];
 
   for (const [path, expected] of routes) {

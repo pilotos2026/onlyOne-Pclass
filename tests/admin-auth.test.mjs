@@ -23,7 +23,12 @@ test("completes administrative invitations without exposing secret keys", async 
   assert.match(callback, /verifyOtp/);
   assert.match(callback, /exchangeCodeForSession/);
   assert.match(callback, /Cache-Control", "private, no-store"/);
-  assert.match(passwordPage, /auth\.getUser\(\)/);
+  assert.match(passwordPage, /verificará la invitación/);
+  assert.match(passwordForm, /fragment\.get\("access_token"\)/);
+  assert.match(passwordForm, /fragment\.get\("refresh_token"\)/);
+  assert.match(passwordForm, /auth\.setSession/);
+  assert.match(passwordForm, /window\.history\.replaceState/);
+  assert.match(passwordForm, /auth\.getSession\(\)/);
   assert.match(passwordForm, /auth\.updateUser\(\{ password \}\)/);
   assert.match(passwordForm, /minLength=\{12\}/);
   assert.doesNotMatch(

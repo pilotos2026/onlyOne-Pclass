@@ -20,8 +20,8 @@ un proyecto Supabase del propietario.
 - Segundo evento preparado a nivel de rutas; la configuración persistente se
   realizará desde las tablas multievento incluidas.
 - Inicio y cierre de sesión reales para el Control Room.
-- Invitaciones administrativas con validación de un solo uso y creación segura
-  de contraseña.
+- Invitaciones administrativas compatibles con la plantilla predeterminada de
+  Supabase, sin SMTP adicional, y creación segura de contraseña.
 - Cinco roles operativos con permisos aplicados en la base de datos.
 - Historial académico inmutable y publicación pública sin datos del equipo.
 - Storage privado para recursos y estructura de planes, promociones y servicios

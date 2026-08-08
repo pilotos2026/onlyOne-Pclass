@@ -88,33 +88,25 @@ Antes de enviar invitaciones, configura la dirección a la que volverán los
 usuarios:
 
 1. Abre **Authentication > URL Configuration**.
-2. En **Site URL** pega la URL HTTPS pública de PClass, sin `/` al final. Cuando
-   se publique el dominio final será `https://live.personalclass.online`.
+2. En **Site URL** pega la URL HTTPS pública de PClass terminada en
+   `/control-room/set-password`. Cuando se publique el dominio final será
+   `https://live.personalclass.online/control-room/set-password`.
 3. En **Redirect URLs** añade la URL completa terminada en `/auth/callback`.
-4. Añade también la URL completa terminada en `/control-room`.
-5. Guarda los cambios.
+4. Añade también las direcciones terminadas en `/control-room/set-password` y
+   `/control-room`.
+5. Guarda todos los cambios.
 
-Configura ahora el enlace seguro del correo de invitación:
+Supabase puede bloquear la edición visual de plantillas mientras no exista un
+SMTP personalizado. No contrates ni configures SMTP para esta fase:
 
 1. Abre **Authentication > Email Templates**.
 2. Selecciona **Invite user**.
-3. Conserva el asunto que prefieras y reemplaza el contenido por:
+3. Conserva la plantilla predeterminada que contiene **Accept invitation**.
+4. No pulses **Configure custom SMTP**.
 
-   ```html
-   <h2>Invitación al Control Room de PClass</h2>
-   <p>Personal Class te ha autorizado como integrante del equipo.</p>
-   <p>
-     <a href="{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=invite">
-       Aceptar invitación y crear contraseña
-     </a>
-   </p>
-   ```
-
-4. Pulsa **Save changes**.
-
-Este enlace entrega a PClass un token de un solo uso. La aplicación lo valida
-en el servidor, elimina el token de la dirección visible y recién entonces
-abre la pantalla para crear la contraseña.
+La plantilla predeterminada confirma la invitación y redirige al Site URL con
+una sesión temporal. PClass valida esa sesión en el navegador, elimina los
+datos temporales de la dirección visible y habilita la creación de contraseña.
 
 Luego invita a cada operador:
 

@@ -1,35 +1,19 @@
-import { redirect } from "next/navigation";
 import { PClassBrand } from "../../../components/pclass-brand";
-import { createSupabaseServerClient } from "../../../lib/supabase/server";
 import { SetPasswordForm } from "./set-password-form";
 
 export const dynamic = "force-dynamic";
 
-export default async function SetPasswordPage() {
-  const supabase = await createSupabaseServerClient();
-
-  if (!supabase) {
-    redirect("/control-room/login?error=invitation");
-  }
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/control-room/login?error=invitation");
-  }
-
+export default function SetPasswordPage() {
   return (
     <main className="login-page">
       <div className="login-brand"><PClassBrand /></div>
       <section className="login-card">
         <span className="lock-mark" aria-hidden="true">✓</span>
-        <p className="eyebrow">Invitación confirmada</p>
+        <p className="eyebrow">Acceso por invitación</p>
         <h1>Crea tu contraseña</h1>
         <p>
-          La cuenta <strong>{user.email}</strong> ya fue verificada. Define una
-          contraseña personal para entrar al Control Room.
+          Abre esta pantalla desde el enlace recibido por correo. PClass
+          verificará la invitación antes de habilitar tu nueva contraseña.
         </p>
         <SetPasswordForm />
       </section>
@@ -42,7 +26,7 @@ export default async function SetPasswordPage() {
         .login-card > p:not(.eyebrow) { margin: 1rem 0 1.5rem; color: var(--pclass-muted); }
         .login-card > p strong { color: var(--pclass-purple-deep); }
         .login-form { display: grid; gap: .9rem; margin-top: 1.4rem; text-align: left; }.login-form label { display: grid; gap: .35rem; color: var(--pclass-purple-deep); font-size: .72rem; font-weight: 900; }.login-form input { width: 100%; min-height: 2.8rem; padding: .68rem .75rem; border: 1px solid var(--pclass-line); border-radius: .55rem; background: #fff; color: var(--pclass-ink); font: inherit; }.login-form input:focus { border-color: var(--pclass-purple); outline: 3px solid var(--pclass-purple-soft); }.login-form button { width: 100%; border: 0; }.login-form button:disabled { cursor: not-allowed; opacity: .55; }
-        .password-hint { margin: -.25rem 0 0; color: var(--pclass-muted); font-size: .64rem; }.form-message { margin: 0; padding: .7rem; border-radius: .5rem; background: #fff4e7; color: #8a4610; font-size: .66rem; text-align: left; }
+        .password-hint { margin: -.25rem 0 0; color: var(--pclass-muted); font-size: .64rem; }.form-message,.invitation-status,.verified-email { margin: 0; padding: .7rem; border-radius: .5rem; font-size: .66rem; text-align: left; }.form-message { background: #fff4e7; color: #8a4610; }.invitation-status { background: var(--pclass-purple-soft); color: var(--pclass-purple); }.verified-email { background: #ecfbf7; color: #08735f; }.verified-email strong { color: inherit; }
       `}</style>
     </main>
   );
