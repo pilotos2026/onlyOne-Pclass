@@ -63,16 +63,22 @@ test("renders every public P0 route and the Control Room shell", async () => {
   }
 });
 
-test("removes all temporary starter assets and metadata", async () => {
-  const [page, layout, packageJson] = await Promise.all([
+test("removes starter metadata and keeps Vercel deployment explicit", async () => {
+  const [page, layout, packageJson, vercelJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../vercel.json", import.meta.url), "utf8"),
   ]);
+
+  const vercel = JSON.parse(vercelJson);
 
   assert.match(page, /EventLanding/);
   assert.match(layout, /PClass \| Experience OnlyOne/);
   assert.doesNotMatch(layout, /next\/font\/google/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+  assert.match(packageJson, /"build:vercel": "next build --webpack"/);
+  assert.equal(vercel.framework, "nextjs");
+  assert.equal(vercel.buildCommand, "npm run build:vercel");
   await assert.rejects(access(new URL("app/_sites-preview", projectRoot)));
 });

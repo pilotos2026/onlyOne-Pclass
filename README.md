@@ -87,6 +87,12 @@ live.personalclass.online**, como define el Build Pack. La conexión clic por cl
 se completará en el BLOQUE 10, cuando Supabase, permisos, datos, pruebas y
 contingencia estén terminados.
 
+Para obtener desde ahora una vista pública de revisión, sigue
+[la guía de Vercel sin Terminal](docs/vercel/PUBLICAR-EN-VERCEL.md). El proyecto
+incluye una compilación nativa de Next.js para Vercel; GitHub Pages no se usa
+porque las sesiones, cookies y rutas administrativas requieren ejecución en el
+servidor.
+
 ## Seguridad de esta entrega
 
 - No contiene contraseñas ni credenciales.
@@ -108,6 +114,7 @@ por chat la contraseña de la base, claves secretas ni contraseñas de operadore
 ## Verificaciones del BLOQUE 2
 
 - Compilación de producción: aprobada.
+- Compilación nativa para Vercel: aprobada.
 - Entrada pública: aprobada.
 - Rutas públicas/operativas, invitación, contraseña y logout: aprobados.
 - Esquema mínimo y estructuras futuras: 27 tablas verificadas.
